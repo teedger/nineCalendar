@@ -1,6 +1,6 @@
 # Есийн Тоолол - Mongolian Nine Calendar
 
-A beautiful web application that tracks the traditional Mongolian winter calendar system of the Nine periods (Есийн тоолол).
+A beautiful web application that tracks the traditional Mongolian winter calendar system of the Nine periods (Есийн тоолол) and displays year-round seasonal changes.
 
 ## About the Nine Periods
 
@@ -18,12 +18,25 @@ In Mongolian tradition, the coldest part of winter is divided into nine periods 
 8. **Нал, шал болно** - Ground becomes muddy
 9. **Ерийн дулаан болно** - Normal warmth returns - Spring arrives!
 
+## Year-Round Seasonal Tracking
+
+The calendar now displays different seasonal messages throughout the year:
+
+- **December 1-21**: "Ес эхлээгүй байна" (Nine hasn't started yet) - Countdown to winter's coldest period
+- **December 22 - March 12 (81 days)**: The Nine Periods - Detailed tracking of each 9-day period
+- **March 13 - May 31**: "Хавар ирлээ" (Spring has arrived) - Spring season with blooming flowers
+- **June 1 - August 31**: "Аагим зуны цаг" (Hot summer days) - Summer season with bright sun
+- **September 1 - November 30**: "Намрын налгар өдрүүд" (Autumn's colorful days) - Autumn with falling leaves
+
+Each season features unique animations and beautiful background images that capture the essence of Mongolian landscapes.
+
 ## Features
 
-- **Real-time Period Tracking**: Automatically calculates and displays the current Nine period
-- **Beautiful Animations**: Each period has its own unique animation representing the season
+- **Year-Round Tracking**: Displays the appropriate season and message for any day of the year
+- **Real-time Period Tracking**: Automatically calculates and displays the current Nine period during winter
+- **Seasonal Animations**: Each season has unique animations (snowflakes, flowers, sun rays, falling leaves)
 - **Traditional Design**: Incorporates traditional Mongolian design elements and colors
-- **Rotating Landscapes**: When not in the Nine period, displays beautiful Mongolian landscape images
+- **Rotating Landscapes**: Beautiful Mongolian landscape images that change every 8 seconds
 - **Responsive Design**: Works beautifully on desktop, tablet, and mobile devices
 - **Mongolian Language**: Authentic Mongolian text and descriptions
 
