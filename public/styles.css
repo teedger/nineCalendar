@@ -250,6 +250,29 @@ body {
     font-weight: bold;
 }
 
+/* Season boxes */
+.season-box {
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(135, 206, 235, 0.2), rgba(212, 175, 55, 0.2));
+    border-radius: 15px;
+    border: 3px solid var(--gold);
+    box-shadow: 0 10px 30px var(--shadow);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.season-box h2 {
+    font-size: 2.5rem;
+    color: var(--deep-blue);
+    margin-bottom: 1rem;
+}
+
+.season-box p {
+    font-size: 1.3rem;
+    color: var(--dark-brown);
+    margin-bottom: 2rem;
+}
+
 /* Info section */
 .info-section {
     margin-top: 3rem;

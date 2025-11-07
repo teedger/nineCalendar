@@ -71,10 +71,12 @@ const alternativeImages = [
 let currentImageIndex = 0;
 let backgroundInterval = null;
 
-// Calculate current Nine period
+// Calculate current Nine period and season
 function calculateNinePeriod() {
     const today = new Date();
     const currentYear = today.getFullYear();
+    const month = today.getMonth(); // 0 = January, 11 = December
+    const date = today.getDate();
 
     // Nine starts on December 22nd each year
     let nineStartDate = new Date(currentYear, 11, 22); // Month is 0-indexed, 11 = December
@@ -84,19 +86,22 @@ function calculateNinePeriod() {
         nineStartDate = new Date(currentYear - 1, 11, 22);
     }
 
-    // Calculate days difference
+    // Calculate days difference from Nine start
     const timeDiff = today - nineStartDate;
     const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-    // Determine which period we're in
-    if (daysPassed < 0) {
-        // Before Nine starts
-        const daysUntilStart = Math.abs(daysPassed);
+    // Check if we're in December before the 22nd
+    if (month === 11 && date < 22) {
+        // December but before the 22nd
+        const daysUntilStart = 22 - date;
         return {
-            status: 'before',
+            status: 'before-december',
             daysUntilStart: daysUntilStart
         };
-    } else if (daysPassed < 81) {
+    }
+
+    // Check if we're during the Nine period (81 days starting Dec 22)
+    if (daysPassed >= 0 && daysPassed < 81) {
         // During Nine (81 days total)
         const currentNine = Math.floor(daysPassed / 9) + 1;
         const dayInCurrentNine = daysPassed % 9;
@@ -109,12 +114,27 @@ function calculateNinePeriod() {
             daysRemaining: daysRemainingInNine,
             totalDaysPassed: daysPassed
         };
-    } else {
-        // After Nine ends
-        return {
-            status: 'after'
-        };
     }
+
+    // After Nine ends (around March 13), check which season we're in
+    // Spring: After Nine ends until May 31
+    // Summer: June 1 - August 31
+    // Autumn: September 1 - November 30
+    // December 1-21: Before Nine
+
+    if (month >= 2 && month <= 4) {
+        // March (2), April (3), May (4) - Spring
+        return { status: 'spring' };
+    } else if (month >= 5 && month <= 7) {
+        // June (5), July (6), August (7) - Summer
+        return { status: 'summer' };
+    } else if (month >= 8 && month <= 10) {
+        // September (8), October (9), November (10) - Autumn
+        return { status: 'autumn' };
+    }
+
+    // Should not reach here, but just in case
+    return { status: 'before-december', daysUntilStart: 0 };
 }
 
 // Create animations for each Nine period
@@ -194,6 +214,7 @@ function createAnimation(animationType) {
             break;
 
         case 'spring-warmth':
+        case 'spring':
             // Sun rays and warmth
             const sun = document.createElement('div');
             sun.textContent = '☀️';
@@ -216,6 +237,83 @@ function createAnimation(animationType) {
                 wave.className = 'warmth-wave';
                 wave.style.animationDelay = (i * 0.7) + 's';
                 container.appendChild(wave);
+            }
+
+            // Spring flowers
+            const flowers = '🌸🌼🌺🌻🌷';
+            for (let i = 0; i < flowers.length; i++) {
+                const flower = document.createElement('div');
+                flower.textContent = flowers[i];
+                flower.style.position = 'absolute';
+                flower.style.left = (i * 18 + 10) + '%';
+                flower.style.bottom = '20%';
+                flower.style.fontSize = '2.5rem';
+                flower.style.animation = 'fadeInUp 1.5s ease-out forwards';
+                flower.style.animationDelay = (i * 0.2) + 's';
+                flower.style.opacity = '0';
+                container.appendChild(flower);
+            }
+            break;
+
+        case 'summer':
+            // Bright sun
+            const summerSun = document.createElement('div');
+            summerSun.textContent = '🌞';
+            summerSun.style.fontSize = '5rem';
+            summerSun.style.position = 'absolute';
+            summerSun.style.animation = 'nineNumberPulse 2s ease-in-out infinite';
+            container.appendChild(summerSun);
+
+            // Heat waves
+            for (let i = 0; i < 5; i++) {
+                const heatWave = document.createElement('div');
+                heatWave.className = 'warmth-wave';
+                heatWave.style.borderColor = '#FFD700';
+                heatWave.style.animationDelay = (i * 0.5) + 's';
+                container.appendChild(heatWave);
+            }
+
+            // Summer elements
+            const summerIcons = '🌻☀️🌻';
+            for (let i = 0; i < summerIcons.length; i++) {
+                const icon = document.createElement('div');
+                icon.textContent = summerIcons[i];
+                icon.style.position = 'absolute';
+                icon.style.left = (i * 30 + 20) + '%';
+                icon.style.fontSize = '3rem';
+                icon.style.animation = 'rotate 8s linear infinite';
+                icon.style.animationDelay = (i * 0.5) + 's';
+                container.appendChild(icon);
+            }
+            break;
+
+        case 'autumn':
+            // Falling leaves
+            const leaves = '🍂🍁🍂🍁🍂🍁🍂';
+            for (let i = 0; i < leaves.length; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'snowflake';
+                leaf.textContent = leaves[i];
+                leaf.style.left = (i * 14 + 5) + '%';
+                leaf.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                leaf.style.animationDelay = (Math.random() * 2) + 's';
+                leaf.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+                container.appendChild(leaf);
+            }
+
+            // Autumn ground decorations
+            const groundLeaves = '🍂🍁🌾🍂🍁';
+            for (let i = 0; i < groundLeaves.length; i++) {
+                const groundLeaf = document.createElement('div');
+                groundLeaf.textContent = groundLeaves[i];
+                groundLeaf.style.position = 'absolute';
+                groundLeaf.style.left = (i * 20 + 5) + '%';
+                groundLeaf.style.bottom = '10px';
+                groundLeaf.style.fontSize = '2rem';
+                groundLeaf.style.animation = 'fadeInUp 1s ease-out forwards';
+                groundLeaf.style.animationDelay = (i * 0.3) + 's';
+                groundLeaf.style.opacity = '0';
+                container.appendChild(groundLeaf);
             }
             break;
     }
@@ -250,6 +348,9 @@ function displayCalendar() {
     document.getElementById('nine-info').classList.add('hidden');
     document.getElementById('before-nine').classList.add('hidden');
     document.getElementById('after-nine').classList.add('hidden');
+    document.getElementById('spring-season').classList.add('hidden');
+    document.getElementById('summer-season').classList.add('hidden');
+    document.getElementById('autumn-season').classList.add('hidden');
 
     if (result.status === 'during') {
         // During Nine period - show Nine info
@@ -274,8 +375,8 @@ function displayCalendar() {
         const backgroundDiv = document.getElementById('background-slideshow');
         backgroundDiv.style.backgroundImage = "url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1920&q=80')";
 
-    } else if (result.status === 'before') {
-        // Before Nine - show countdown and landscapes
+    } else if (result.status === 'before-december') {
+        // December but before the 22nd - show countdown and landscapes
         const beforeNine = document.getElementById('before-nine');
         const countdownDiv = document.getElementById('countdown');
 
@@ -285,8 +386,77 @@ function displayCalendar() {
         // Start landscape slideshow
         startBackgroundSlideshow();
 
+    } else if (result.status === 'spring') {
+        // Spring season - show spring message and animation
+        const springBox = document.getElementById('spring-season');
+        const animationContainer = document.getElementById('spring-animation');
+
+        // Clear and create spring animation
+        animationContainer.innerHTML = '';
+        const oldContainer = document.getElementById('nine-animation');
+        if (oldContainer) {
+            oldContainer.id = 'temp-animation';
+        }
+        animationContainer.id = 'nine-animation';
+        createAnimation('spring');
+        animationContainer.id = 'spring-animation';
+        if (oldContainer) {
+            oldContainer.id = 'nine-animation';
+        }
+
+        springBox.classList.remove('hidden');
+
+        // Start landscape slideshow
+        startBackgroundSlideshow();
+
+    } else if (result.status === 'summer') {
+        // Summer season - show summer message and animation
+        const summerBox = document.getElementById('summer-season');
+        const animationContainer = document.getElementById('summer-animation');
+
+        // Clear and create summer animation
+        animationContainer.innerHTML = '';
+        const oldContainer = document.getElementById('nine-animation');
+        if (oldContainer) {
+            oldContainer.id = 'temp-animation';
+        }
+        animationContainer.id = 'nine-animation';
+        createAnimation('summer');
+        animationContainer.id = 'summer-animation';
+        if (oldContainer) {
+            oldContainer.id = 'nine-animation';
+        }
+
+        summerBox.classList.remove('hidden');
+
+        // Start landscape slideshow
+        startBackgroundSlideshow();
+
+    } else if (result.status === 'autumn') {
+        // Autumn season - show autumn message and animation
+        const autumnBox = document.getElementById('autumn-season');
+        const animationContainer = document.getElementById('autumn-animation');
+
+        // Clear and create autumn animation
+        animationContainer.innerHTML = '';
+        const oldContainer = document.getElementById('nine-animation');
+        if (oldContainer) {
+            oldContainer.id = 'temp-animation';
+        }
+        animationContainer.id = 'nine-animation';
+        createAnimation('autumn');
+        animationContainer.id = 'autumn-animation';
+        if (oldContainer) {
+            oldContainer.id = 'nine-animation';
+        }
+
+        autumnBox.classList.remove('hidden');
+
+        // Start landscape slideshow
+        startBackgroundSlideshow();
+
     } else {
-        // After Nine - show completion message and landscapes
+        // After Nine - show completion message and landscapes (this shouldn't happen much now)
         document.getElementById('after-nine').classList.remove('hidden');
 
         // Start landscape slideshow
