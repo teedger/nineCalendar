@@ -464,10 +464,39 @@ function displayCalendar() {
     }
 }
 
+// Update footer with current date
+function updateFooterDate() {
+    const footerDateElement = document.getElementById('footer-date');
+    const today = new Date();
+
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long'
+    };
+
+    const dateString = today.toLocaleDateString('mn-MN', options);
+    footerDateElement.textContent = dateString;
+}
+
 // Initialize the calendar when page loads
 document.addEventListener('DOMContentLoaded', () => {
     displayCalendar();
+    updateFooterDate();
 
     // Update every hour
     setInterval(displayCalendar, 3600000);
+
+    // Update date at midnight
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    const msUntilMidnight = midnight - now;
+
+    setTimeout(() => {
+        updateFooterDate();
+        // Then update every 24 hours
+        setInterval(updateFooterDate, 86400000);
+    }, msUntilMidnight);
 });
