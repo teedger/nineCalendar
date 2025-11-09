@@ -151,7 +151,7 @@ function createAnimation(animationType) {
             for (let i = 0; i < 15; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
-                snowflake.textContent = '❄';
+                snowflake.innerHTML = '&#10052;';
                 snowflake.style.left = Math.random() * 100 + '%';
                 snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 snowflake.style.animationDelay = (Math.random() * 2) + 's';
@@ -174,11 +174,11 @@ function createAnimation(animationType) {
 
         case 'ice-melting':
             // Water drops
-            const drops = '💧💦💧💦💧';
+            const drops = ['&#128167;', '&#128166;', '&#128167;', '&#128166;', '&#128167;'];
             for (let i = 0; i < drops.length; i++) {
                 const drop = document.createElement('div');
                 drop.className = 'snowflake';
-                drop.textContent = drops[i];
+                drop.innerHTML = drops[i];
                 drop.style.left = (i * 20 + 10) + '%';
                 drop.style.animationDuration = '2s';
                 drop.style.animationDelay = (i * 0.2) + 's';
@@ -188,10 +188,10 @@ function createAnimation(animationType) {
 
         case 'new-growth':
             // Growing plants
-            const plants = '🌱🌿🌱🌿🌱';
+            const plants = ['&#127793;', '&#127807;', '&#127793;', '&#127807;', '&#127793;'];
             for (let i = 0; i < plants.length; i++) {
                 const plant = document.createElement('div');
-                plant.textContent = plants[i];
+                plant.innerHTML = plants[i];
                 plant.style.position = 'absolute';
                 plant.style.left = (i * 20 + 10) + '%';
                 plant.style.bottom = '0';
@@ -205,9 +205,8 @@ function createAnimation(animationType) {
 
         case 'muddy-season':
             // Earth symbols
-            const earth = '🌍🌎🌏';
             const earthSymbol = document.createElement('div');
-            earthSymbol.textContent = earth[0];
+            earthSymbol.innerHTML = '&#127757;';
             earthSymbol.style.fontSize = '4rem';
             earthSymbol.style.animation = 'rotate 10s linear infinite';
             container.appendChild(earthSymbol);
@@ -217,7 +216,7 @@ function createAnimation(animationType) {
         case 'spring':
             // Sun rays and warmth
             const sun = document.createElement('div');
-            sun.textContent = '☀️';
+            sun.innerHTML = '&#9728;&#65039;';
             sun.style.fontSize = '4rem';
             sun.style.position = 'absolute';
             sun.style.animation = 'nineNumberPulse 2s ease-in-out infinite';
@@ -240,10 +239,10 @@ function createAnimation(animationType) {
             }
 
             // Spring flowers
-            const flowers = '🌸🌼🌺🌻🌷';
+            const flowers = ['&#127800;', '&#127804;', '&#127802;', '&#127803;', '&#127799;'];
             for (let i = 0; i < flowers.length; i++) {
                 const flower = document.createElement('div');
-                flower.textContent = flowers[i];
+                flower.innerHTML = flowers[i];
                 flower.style.position = 'absolute';
                 flower.style.left = (i * 18 + 10) + '%';
                 flower.style.bottom = '20%';
@@ -258,7 +257,7 @@ function createAnimation(animationType) {
         case 'summer':
             // Bright sun
             const summerSun = document.createElement('div');
-            summerSun.textContent = '🌞';
+            summerSun.innerHTML = '&#127774;';
             summerSun.style.fontSize = '5rem';
             summerSun.style.position = 'absolute';
             summerSun.style.animation = 'nineNumberPulse 2s ease-in-out infinite';
@@ -274,10 +273,10 @@ function createAnimation(animationType) {
             }
 
             // Summer elements
-            const summerIcons = '🌻☀️🌻';
+            const summerIcons = ['&#127803;', '&#9728;&#65039;', '&#127803;'];
             for (let i = 0; i < summerIcons.length; i++) {
                 const icon = document.createElement('div');
-                icon.textContent = summerIcons[i];
+                icon.innerHTML = summerIcons[i];
                 icon.style.position = 'absolute';
                 icon.style.left = (i * 30 + 20) + '%';
                 icon.style.fontSize = '3rem';
@@ -289,11 +288,11 @@ function createAnimation(animationType) {
 
         case 'autumn':
             // Falling leaves
-            const leaves = '🍂🍁🍂🍁🍂🍁🍂';
+            const leaves = ['&#127810;', '&#127809;', '&#127810;', '&#127809;', '&#127810;', '&#127809;', '&#127810;'];
             for (let i = 0; i < leaves.length; i++) {
                 const leaf = document.createElement('div');
                 leaf.className = 'snowflake';
-                leaf.textContent = leaves[i];
+                leaf.innerHTML = leaves[i];
                 leaf.style.left = (i * 14 + 5) + '%';
                 leaf.style.animationDuration = (Math.random() * 4 + 3) + 's';
                 leaf.style.animationDelay = (Math.random() * 2) + 's';
@@ -302,10 +301,10 @@ function createAnimation(animationType) {
             }
 
             // Autumn ground decorations
-            const groundLeaves = '🍂🍁🌾🍂🍁';
+            const groundLeaves = ['&#127810;', '&#127809;', '&#127806;', '&#127810;', '&#127809;'];
             for (let i = 0; i < groundLeaves.length; i++) {
                 const groundLeaf = document.createElement('div');
-                groundLeaf.textContent = groundLeaves[i];
+                groundLeaf.innerHTML = groundLeaves[i];
                 groundLeaf.style.position = 'absolute';
                 groundLeaf.style.left = (i * 20 + 5) + '%';
                 groundLeaf.style.bottom = '10px';
