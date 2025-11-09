@@ -17,7 +17,7 @@
 }
 
 body {
-  font-family: "Noto Serif", "Noto Sans Mongolian", serif;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -52,16 +52,19 @@ body {
   backdrop-filter: blur(2px);
 }
 
-/* Container */
+/* Container with liquid glass effect */
 .container {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background: rgba(255, 248, 220, 0.95);
+  background: rgba(255, 248, 220, 0.25);
   border-radius: 20px;
-  box-shadow: 0 20px 60px var(--shadow);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   position: relative;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
 }
 
 /* Traditional borders */
@@ -86,19 +89,22 @@ body {
   text-align: center;
   position: relative;
   margin-bottom: 3rem;
+  z-index: 10;
 }
 
 .title {
   font-size: 3rem;
   color: var(--deep-blue);
-  text-shadow: 2px 2px 4px var(--shadow);
-  letter-spacing: 2px;
+  letter-spacing: -0.5px;
+  font-weight: 800;
   display: inline-block;
   background: linear-gradient(135deg, var(--deep-blue), var(--crimson));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: titleGlow 3s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
 }
 
 @keyframes titleGlow {
@@ -164,19 +170,23 @@ body {
   display: none !important;
 }
 
-/* Nine info display */
+/* Nine info display with liquid glass effect */
 .nine-info {
   text-align: center;
   padding: 2rem;
   background: linear-gradient(
     135deg,
-    rgba(30, 58, 95, 0.1),
-    rgba(220, 20, 60, 0.1)
+    rgba(30, 58, 95, 0.15),
+    rgba(220, 20, 60, 0.15)
   );
   border-radius: 15px;
-  border: 3px solid var(--gold);
-  box-shadow: 0 10px 30px var(--shadow);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15px) saturate(150%);
+  -webkit-backdrop-filter: blur(15px) saturate(150%);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  z-index: 5;
 }
 
 @keyframes fadeInUp {
@@ -192,11 +202,12 @@ body {
 
 .nine-title {
   font-size: 4rem;
-  font-weight: bold;
+  font-weight: 800;
   color: var(--crimson);
   margin-bottom: 1rem;
-  text-shadow: 3px 3px 6px var(--shadow);
   animation: nineNumberPulse 2s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
 }
 
 @keyframes nineNumberPulse {
@@ -214,6 +225,8 @@ body {
   color: var(--deep-blue);
   margin-bottom: 2rem;
   font-weight: 600;
+  position: relative;
+  z-index: 10;
 }
 
 .nine-animation {
@@ -232,7 +245,7 @@ body {
   font-style: italic;
 }
 
-/* Message boxes */
+/* Message boxes with liquid glass effect */
 .message-box {
   text-align: center;
   padding: 3rem;
@@ -242,20 +255,30 @@ body {
     rgba(212, 175, 55, 0.2)
   );
   border-radius: 15px;
-  border: 3px solid var(--gold);
-  box-shadow: 0 10px 30px var(--shadow);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  z-index: 5;
 }
 
 .message-box h2 {
   font-size: 2.5rem;
+  font-weight: 700;
   color: var(--deep-blue);
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
 }
 
 .message-box p {
   font-size: 1.3rem;
+  font-weight: 500;
   color: var(--dark-brown);
+  position: relative;
+  z-index: 10;
 }
 
 .countdown {
@@ -265,7 +288,7 @@ body {
   font-weight: bold;
 }
 
-/* Season boxes */
+/* Season boxes with liquid glass effect */
 .season-box {
   text-align: center;
   padding: 3rem;
@@ -275,47 +298,91 @@ body {
     rgba(212, 175, 55, 0.2)
   );
   border-radius: 15px;
-  border: 3px solid var(--gold);
-  box-shadow: 0 10px 30px var(--shadow);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  z-index: 5;
 }
 
 .season-box h2 {
   font-size: 2.5rem;
+  font-weight: 700;
   color: var(--deep-blue);
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
 }
 
 .season-box p {
   font-size: 1.3rem;
+  font-weight: 500;
   color: var(--dark-brown);
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
 }
 
-/* Info section */
+/* Info section with enhanced liquid glass effect */
 .info-section {
   margin-top: 3rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 15px;
-  border: 2px solid var(--light-gold);
+  padding: 2.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(244, 228, 193, 0.2)
+  );
+  border-radius: 20px;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.3),
+    inset 0 0 60px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.info-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
 }
 
 .info-section h3 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--deep-blue);
   text-align: center;
   margin-bottom: 1.5rem;
   border-bottom: 3px solid var(--gold);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
+  position: relative;
+  z-index: 10;
+  letter-spacing: -0.3px;
 }
 
 .info-section p {
   font-size: 1.1rem;
-  line-height: 1.8;
+  line-height: 1.9;
   color: var(--dark-brown);
   margin-bottom: 2rem;
   text-align: justify;
+  font-weight: 500;
+  position: relative;
+  z-index: 10;
 }
 
 /* Nine list */
@@ -328,41 +395,59 @@ body {
 .nine-item {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 1.2rem;
   background: linear-gradient(
     135deg,
-    rgba(30, 58, 95, 0.05),
-    rgba(212, 175, 55, 0.05)
+    rgba(30, 58, 95, 0.12),
+    rgba(212, 175, 55, 0.12)
   );
-  border-radius: 10px;
+  border-radius: 12px;
   border-left: 4px solid var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.15);
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 5;
 }
 
 .nine-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 5px 15px var(--shadow);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 0 8px 28px 0 rgba(31, 38, 135, 0.35);
   background: linear-gradient(
     135deg,
-    rgba(30, 58, 95, 0.1),
-    rgba(212, 175, 55, 0.1)
+    rgba(30, 58, 95, 0.2),
+    rgba(212, 175, 55, 0.2)
   );
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .nine-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   background: linear-gradient(135deg, var(--deep-blue), var(--crimson));
   color: white;
   border-radius: 50%;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-right: 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-right: 1.25rem;
   flex-shrink: 0;
-  box-shadow: 0 3px 10px var(--shadow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 10;
+}
+
+.nine-item span:not(.nine-badge) {
+  font-weight: 500;
+  font-size: 1.05rem;
+  position: relative;
+  z-index: 10;
 }
 
 /* Animation elements for each Nine */
@@ -443,17 +528,20 @@ body {
   }
 }
 
-/* Footer */
+/* Footer with liquid glass effect */
 .footer {
   margin-top: 2rem;
   padding: 1.5rem 2rem;
   background: linear-gradient(
     135deg,
-    rgba(30, 58, 95, 0.1),
-    rgba(212, 175, 55, 0.1)
+    rgba(30, 58, 95, 0.15),
+    rgba(212, 175, 55, 0.15)
   );
   border-radius: 10px;
-  border-top: 2px solid var(--gold);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2);
 }
 
 .footer-content {
@@ -467,12 +555,17 @@ body {
 .footer-date {
   font-size: 1.2rem;
   color: var(--dark-brown);
-  font-weight: 500;
+  font-weight: 600;
+  position: relative;
+  z-index: 10;
 }
 
 .footer-attribution {
   font-size: 1rem;
+  font-weight: 500;
   color: var(--dark-brown);
+  position: relative;
+  z-index: 10;
 }
 
 .footer-attribution a {
