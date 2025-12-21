@@ -117,11 +117,6 @@ function formatDate(date, nineNumber) {
     const month = months[date.getMonth()];
     const day = date.getDate();
 
-    // For the third nine, we might cross into next year
-    if (nineNumber === 3 && date.getMonth() === 0) {
-        return `${month} ${day} - ${date.getFullYear()}`;
-    }
-
     return `${month} ${day}`;
 }
 
@@ -161,32 +156,16 @@ function updateUI() {
 
     const nineDates = calculateNineDates(nineStartDate);
 
-    // Update the three visible nine cards (show current or first 3)
-    let displayNines = [1, 2, 3]; // Default to first three
-
-    if (result.status === 'during') {
-        // Show current nine and surrounding ones
-        const currentNine = result.nine;
-        if (currentNine === 1) {
-            displayNines = [1, 2, 3];
-        } else if (currentNine === 9) {
-            displayNines = [7, 8, 9];
-        } else {
-            displayNines = [currentNine - 1, currentNine, currentNine + 1];
-        }
-    }
-
-    // Update nine cards
-    displayNines.forEach((nineNum, index) => {
-        const cardIndex = index + 1;
+    // Update all 9 nine cards
+    for (let nineNum = 1; nineNum <= 9; nineNum++) {
         const data = nineCalendar[nineNum];
         const dates = nineDates[nineNum];
 
-        const nameEl = document.getElementById(`nine-${cardIndex}-name`);
-        const datesEl = document.getElementById(`nine-${cardIndex}-dates`);
-        const card = document.querySelector(`.nine-card[data-nine="${cardIndex}"]`);
-        const iconEl = card.querySelector('.nine-icon');
-        const labelEl = card.querySelector('.nine-label');
+        const nameEl = document.getElementById(`nine-${nineNum}-name`);
+        const datesEl = document.getElementById(`nine-${nineNum}-dates`);
+        const card = document.querySelector(`.nine-card[data-nine="${nineNum}"]`);
+        const iconEl = card?.querySelector('.nine-icon');
+        const labelEl = card?.querySelector('.nine-label');
 
         if (nameEl) nameEl.textContent = data.titleEn;
         if (datesEl) datesEl.textContent = `${dates.start} - ${dates.end}`;
@@ -197,16 +176,18 @@ function updateUI() {
         if (labelEl) labelEl.textContent = `${nineNames[nineNum - 1]} Nine:`;
 
         // Highlight current nine
-        if (result.status === 'during' && nineNum === result.nine) {
-            card.style.background = 'rgba(255, 255, 255, 0.98)';
-            card.style.boxShadow = '0 6px 30px rgba(0, 0, 0, 0.15)';
-            card.style.border = '2px solid rgba(212, 165, 116, 0.5)';
-        } else {
-            card.style.background = 'rgba(255, 255, 255, 0.95)';
-            card.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
-            card.style.border = '1px solid rgba(255, 255, 255, 0.5)';
+        if (card) {
+            if (result.status === 'during' && nineNum === result.nine) {
+                card.style.background = 'rgba(255, 255, 255, 0.98)';
+                card.style.boxShadow = '0 6px 30px rgba(0, 0, 0, 0.15)';
+                card.style.border = '2px solid rgba(212, 165, 116, 0.5)';
+            } else {
+                card.style.background = 'rgba(255, 255, 255, 0.62)';
+                card.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+                card.style.border = '1px solid rgba(255, 255, 255, 0.35)';
+            }
         }
-    });
+    }
 
     // Update status card
     const currentNineEl = document.getElementById('current-nine');

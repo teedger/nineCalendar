@@ -112,22 +112,26 @@ body {
 .nine-cards {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
   z-index: 10;
   align-self: flex-start;
   margin-top: 2rem;
 }
 
 .nine-card {
-  background: var(--white-transparent);
+  background: rgba(255, 255, 255, 0.62);
   backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .nine-card:hover {
@@ -358,14 +362,21 @@ body {
 
   .nine-cards {
     margin-top: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .nine-card {
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.25rem;
+    min-height: 130px;
   }
 
   .nine-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .nine-label {
+    font-size: 0.8rem;
   }
 
   .status-card {
@@ -391,20 +402,25 @@ body {
     font-size: 0.85rem;
   }
 
+  .nine-cards {
+    grid-template-columns: 1fr;
+  }
+
   .nine-card {
     padding: 1rem 1.25rem;
+    min-height: 120px;
   }
 
   .nine-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .nine-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .nine-dates {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .current-nine {
