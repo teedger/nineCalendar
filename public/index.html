@@ -3,191 +3,187 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Есийн Тоолол - Mongolian Winter Calendar</title>
+    <title>Mongolian Nine Calendar</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <!-- Background slideshow container -->
-    <div id="background-slideshow" class="background-slideshow"></div>
-
-    <!-- Main content -->
-    <div class="container">
-      <!-- Traditional Mongolian pattern border -->
-      <div class="traditional-border">
-        <svg
-          class="border-pattern"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,50 Q25,25 50,50 T100,50"
-            stroke="#D4AF37"
-            fill="none"
-            stroke-width="2"
-          />
-          <path
-            d="M0,50 Q25,75 50,50 T100,50"
-            stroke="#D4AF37"
-            fill="none"
-            stroke-width="2"
-          />
-        </svg>
-      </div>
-
-      <!-- Header with traditional elements -->
+    <!-- Main container -->
+    <div class="page-wrapper">
+      <!-- Header -->
       <header class="header">
-        <div class="ornament ornament-left">✦</div>
-        <div class="footer-date" id="footer-date"></div>
-        <h1 class="title">Есийн Тоолол</h1>
-        <div class="ornament ornament-right">✦</div>
+        <h1 class="site-title">MONGOLIAN<br />NINE CALENDAR</h1>
+        <button class="menu-btn" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </header>
 
-      <!-- Main calendar display -->
-      <main class="main-content">
-        <div id="calendar-display" class="calendar-display">
-          <div class="loading">Уншиж байна...</div>
+      <!-- Main content area -->
+      <main class="main-container">
+        <!-- Large decorative "9" -->
+        <div class="nine-graphic">
+          <svg viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outermost layer -->
+            <path
+              d="M 150 40
+                 C 200 40, 240 80, 240 130
+                 C 240 180, 200 220, 150 220
+                 C 100 220, 60 180, 60 130
+                 C 60 80, 100 40, 150 40
+                 M 240 130
+                 L 240 240
+                 Q 240 310, 190 360
+                 Q 155 385, 120 385"
+              fill="none"
+              stroke="url(#gradient1)"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <!-- Middle layer -->
+            <path
+              d="M 150 55
+                 C 192 55, 225 88, 225 130
+                 C 225 172, 192 205, 150 205
+                 C 108 205, 75 172, 75 130
+                 C 75 88, 108 55, 150 55
+                 M 225 130
+                 L 225 240
+                 Q 225 305, 182 350
+                 Q 155 370, 128 370"
+              fill="none"
+              stroke="url(#gradient2)"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <!-- Inner layer -->
+            <path
+              d="M 150 70
+                 C 184 70, 210 96, 210 130
+                 C 210 164, 184 190, 150 190
+                 C 116 190, 90 164, 90 130
+                 C 90 96, 116 70, 150 70
+                 M 210 130
+                 L 210 240
+                 Q 210 300, 174 340
+                 Q 155 355, 136 355"
+              fill="none"
+              stroke="url(#gradient3)"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop
+                  offset="0%"
+                  style="stop-color: #d4a574; stop-opacity: 0.7"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #c89866; stop-opacity: 0.7"
+                />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop
+                  offset="0%"
+                  style="stop-color: #d4a574; stop-opacity: 0.6"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #c89866; stop-opacity: 0.6"
+                />
+              </linearGradient>
+              <linearGradient id="gradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop
+                  offset="0%"
+                  style="stop-color: #d4a574; stop-opacity: 0.5"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #c89866; stop-opacity: 0.5"
+                />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
 
-        <!-- Nine periods information -->
-        <div id="nine-info" class="nine-info hidden">
-          <div class="nine-title">
-            <span id="nine-number" class="nine-number"></span>
+        <!-- Nine periods cards -->
+        <div class="nine-cards">
+          <div class="nine-card" data-nine="1">
+            <div class="card-header">
+              <div class="nine-label">First Nine:</div>
+              <h3 class="nine-name" id="nine-1-name">Nine of Ice</h3>
+            </div>
+            <div class="nine-icon">❄️</div>
+            <div class="nine-dates" id="nine-1-dates">Jun 12 - Mar 27</div>
+            <div class="nine-progress">
+              <div class="progress-bar"><span></span><span></span></div>
+            </div>
           </div>
-          <div class="nine-description" id="nine-description"></div>
-          <div class="nine-animation" id="nine-animation"></div>
-          <div class="days-remaining" id="days-remaining"></div>
+
+          <div class="nine-card" data-nine="2">
+            <div class="card-header">
+              <div class="nine-label">Second Nine:</div>
+              <h3 class="nine-name" id="nine-2-name">Nine of Frost</h3>
+            </div>
+            <div class="nine-icon">❄️</div>
+            <div class="nine-dates" id="nine-2-dates">Sep 12 - Sep 3</div>
+            <div class="nine-progress">
+              <div class="progress-bar"><span></span><span></span></div>
+            </div>
+          </div>
+
+          <div class="nine-card" data-nine="3">
+            <div class="card-header">
+              <div class="nine-label">Third Nine:</div>
+              <h3 class="nine-name" id="nine-3-name">Nine of Cold</h3>
+            </div>
+            <div class="nine-icon">🔺</div>
+            <div class="nine-dates" id="nine-3-dates">Jun 12 - 2027</div>
+            <div class="nine-progress">
+              <div class="progress-bar"><span></span><span></span></div>
+            </div>
+          </div>
         </div>
 
-        <!-- Before Nine message -->
-        <div id="before-nine" class="message-box hidden">
-          <h2>Ес эхлээгүй байна</h2>
-          <p>Өвлийн 9 есийн үе 12 сарын 22-нд эхэлнэ</p>
-          <div class="countdown" id="countdown"></div>
-        </div>
-
-        <!-- After Nine message -->
-        <div id="after-nine" class="message-box hidden">
-          <h2>Ес дууссан</h2>
-          <p>Дулаахан хавар ирлээ! 🌸</p>
-        </div>
-
-        <!-- Spring Season -->
-        <div id="spring-season" class="season-box hidden">
-          <h2>Хавар ирлээ</h2>
-          <p>
-            Ес дуусаж, дулаахан хавар ирлээ. Байгаль хангай ногооноор будагдаж
-            зун ирэх дөхлөө.
-          </p>
-          <div class="nine-animation" id="spring-animation"></div>
-        </div>
-
-        <!-- Summer Season -->
-        <div id="summer-season" class="season-box hidden">
-          <h2>Аагим зуны цаг</h2>
-          <p>Зуны халуун цаг ирлээ. Цэцэг жимс ургаж, нар дээрээс төөнөж,</p>
-          <div class="nine-animation" id="summer-animation"></div>
-        </div>
-
-        <!-- Autumn Season -->
-        <div id="autumn-season" class="season-box hidden">
-          <h2>Намрын налгар өдрүүд</h2>
-          <p>
-            Намар ирж, байгаль хангай алтан өнгөөр будагдаж, хүйтний улирал
-            ойртож байна.
-          </p>
-          <div class="nine-animation" id="autumn-animation"></div>
+        <!-- Current status card -->
+        <div class="status-card">
+          <div class="status-header">
+            <span>Today's Nine:</span>
+          </div>
+          <h2 class="current-nine" id="current-nine">Fifth Nine,<br />Day 3</h2>
+          <div class="status-divider"></div>
+          <div class="current-phase">
+            <span>Current Phase:</span>
+            <h3 id="current-phase">Deep Winter</h3>
+          </div>
+          <div class="phase-icon" id="phase-icon">❄️</div>
         </div>
       </main>
 
-      <!-- Information section -->
-      <section class="info-section">
-        <h3>Есийн тухай</h3>
-        <p>
-          Монголчуудын уламжлалт өвлийн тооллын дагуу өвлийн хамгийн хүйтэн үе
-          12 сарын 22-нд эхэлж, 9 ес буюу нийт 81 хоног үргэлжилдэг. Ес дуусах
-          үед ердийн сайхан дулаан болж хавар ирдэг.
-        </p>
-
-        <div class="nine-list">
-          <div class="nine-item">
-            <span class="nine-badge">1</span>
-            <span>Нэрмэл архи хөлдөнө</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">2</span>
-            <span>Хорз архи хөлдөнө</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">3</span>
-            <span>Гунан үхрийн эвэр хуга хөлдөнө</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">4</span>
-            <span>Дөнөн үхрийн эвэр хуга хөлдөнө</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">5</span>
-            <span>Тавьсан будаа хөлдөхгүй</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">6</span>
-            <span>Зурайсан зам гарна</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">7</span>
-            <span>Довын толгой борлоно</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">8</span>
-            <span>Нал, шал болно</span>
-          </div>
-          <div class="nine-item">
-            <span class="nine-badge">9</span>
-            <span>Ерийн дулаан болно</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Traditional Mongolian pattern border bottom -->
-      <div class="traditional-border traditional-border-bottom">
-        <svg
-          class="border-pattern"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,50 Q25,25 50,50 T100,50"
-            stroke="#D4AF37"
-            fill="none"
-            stroke-width="2"
-          />
-          <path
-            d="M0,50 Q25,75 50,50 T100,50"
-            stroke="#D4AF37"
-            fill="none"
-            stroke-width="2"
-          />
-        </svg>
-      </div>
-
       <!-- Footer -->
       <footer class="footer">
-        <div class="footer-content">
-          <div class="footer-attribution">
-            2025 Telmuun Sukhbaatar
-            <a
-              href="https://github.com/teedger"
-              target="_blank"
-              rel="noopener noreferrer"
-              >@teedger</a
-            >
-          </div>
+        <div class="footer-date" id="footer-date"></div>
+        <div class="footer-attribution">
+          2025 Telmuun Sukhbaatar
+          <a
+            href="https://github.com/teedger"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@teedger</a
+          >
         </div>
       </footer>
     </div>
