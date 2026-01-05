@@ -1,60 +1,40 @@
-// Nine Calendar Data - English names for professional design
-const nineCalendar = {
-    1: {
-        titleMn: "Нэрмэл архи хөлдөнө",
-        titleEn: "Nine of Ice",
-        icon: "❄️",
-        phase: "Extreme Cold"
-    },
-    2: {
-        titleMn: "Хорз архи хөлдөнө",
-        titleEn: "Nine of Frost",
-        icon: "❄️",
-        phase: "Deep Freeze"
-    },
-    3: {
-        titleMn: "Гунан үхрийн эвэр хуга хөлдөнө",
-        titleEn: "Nine of Cold",
-        icon: "🔺",
-        phase: "Bitter Cold"
-    },
-    4: {
-        titleMn: "Дөнөн үхрийн эвэр хуга хөлдөнө",
-        titleEn: "Nine of Deep Winter",
-        icon: "❄️",
-        phase: "Deep Winter"
-    },
-    5: {
-        titleMn: "Тавьсан будаа хөлдөхгүй",
-        titleEn: "Nine of Thaw",
-        icon: "💧",
-        phase: "Early Thaw"
-    },
-    6: {
-        titleMn: "Зурайсан зам гарна",
-        titleEn: "Nine of Melting",
-        icon: "🌊",
-        phase: "Ice Melting"
-    },
-    7: {
-        titleMn: "Довын толгой борлоно",
-        titleEn: "Nine of Growth",
-        icon: "🌱",
-        phase: "New Growth"
-    },
-    8: {
-        titleMn: "Нал, шал болно",
-        titleEn: "Nine of Mud",
-        icon: "🌍",
-        phase: "Muddy Season"
-    },
-    9: {
-        titleMn: "Ерийн дулаан болно",
-        titleEn: "Nine of Warmth",
-        icon: "☀️",
-        phase: "Spring Warmth"
+// Nine Calendar Data - will be loaded from JSON
+let nineCalendar = {};
+
+// Load nine calendar data from JSON file
+async function loadNineData() {
+    try {
+        const response = await fetch('nine-translation.json');
+        const data = await response.json();
+
+        // Transform JSON array format to object format
+        for (let key in data) {
+            nineCalendar[key] = {
+                label: data[key][0],        // "First Nine"
+                titleEn: data[key][1],      // "Nine of Ice"
+                context: data[key][2],      // Context description
+                mongolianScript: data[key][3] // Mongolian script
+            };
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error loading nine-translation.json:', error);
+        // Fallback data if JSON fails to load
+        nineCalendar = {
+            1: { label: "First Nine", titleEn: "Nine of Ice", context: "Traditional milk vodka will freeze", mongolianScript: "ᠨᠢᢉᠡ ᠶᠢᠰᠦ" },
+            2: { label: "Second Nine", titleEn: "Nine of Frost", context: "Even quadruple-distilled milk vodka will freeze", mongolianScript: "ᠬᠣᠶᠠᠷ ᠶᠢᠰᠦ" },
+            3: { label: "Third Nine", titleEn: "Nine of Immense Cold", context: "A three-year-old cow's horns will freeze", mongolianScript: "ᠭᠤᠷᠪᠠᠨ ᠶᠢᠰᠦ" },
+            4: { label: "Fourth Nine", titleEn: "Nine of Deep Winter", context: "A four-year-old cow's horns will freeze", mongolianScript: "ᠳᠥᠷᠪᠡᠨ ᠶᠢᠰᠦ" },
+            5: { label: "Fifth Nine", titleEn: "Nine of Thaw", context: "Raw rice left on a plate will no longer freeze", mongolianScript: "ᠲᠠᠪᠤᠨ ᠶᠢᠰᠦ" },
+            6: { label: "Sixth Nine", titleEn: "Nine of Defrost", context: "The roads will emerge from under the snow", mongolianScript: "ᠵᠢᠷᠭᠤᠭᠠᠨ ᠶᠢᠰᠦ" },
+            7: { label: "Seventh Nine", titleEn: "Nine of Melting", context: "Hilltop snow will melt", mongolianScript: "ᠳᠣᠯᠤᠭᠠᠨ ᠶᠢᠰᠦ" },
+            8: { label: "Eighth Nine", titleEn: "Nine of Mud", context: "Footsteps will make squelching sounds in the mud", mongolianScript: "ᠨᠠᠢᠮᠠᠨ ᠶᠢᠰᠦ" },
+            9: { label: "Ninth Nine", titleEn: "Nine of Warmth", context: "Spring warmth arrives", mongolianScript: "ᠶᠢᠰᠦᠨ ᠶᠢᠰᠦ" }
+        };
+        return false;
     }
-};
+}
 
 // Calculate current Nine period
 function calculateNinePeriod() {
@@ -161,19 +141,18 @@ function updateUI() {
         const data = nineCalendar[nineNum];
         const dates = nineDates[nineNum];
 
+        const labelEl = document.getElementById(`nine-${nineNum}-label`);
         const nameEl = document.getElementById(`nine-${nineNum}-name`);
+        const contextEl = document.getElementById(`nine-${nineNum}-context`);
         const datesEl = document.getElementById(`nine-${nineNum}-dates`);
+        const scriptEl = document.getElementById(`nine-${nineNum}-script`);
         const card = document.querySelector(`.nine-card[data-nine="${nineNum}"]`);
-        const iconEl = card?.querySelector('.nine-icon');
-        const labelEl = card?.querySelector('.nine-label');
 
+        if (labelEl) labelEl.textContent = data.label;
         if (nameEl) nameEl.textContent = data.titleEn;
+        if (contextEl) contextEl.textContent = data.context;
         if (datesEl) datesEl.textContent = `${dates.start} - ${dates.end}`;
-        if (iconEl) iconEl.textContent = data.icon;
-
-        // Update label text
-        const nineNames = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth'];
-        if (labelEl) labelEl.textContent = `${nineNames[nineNum - 1]} Nine:`;
+        if (scriptEl) scriptEl.textContent = data.mongolianScript;
 
         // Highlight current nine
         if (card) {
@@ -196,11 +175,10 @@ function updateUI() {
 
     if (result.status === 'during') {
         const data = nineCalendar[result.nine];
-        const nineNames = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth'];
 
-        currentNineEl.innerHTML = `${nineNames[result.nine - 1]} Nine,<br />Day ${result.dayInNine}`;
-        currentPhaseEl.textContent = data.phase;
-        phaseIconEl.textContent = data.icon;
+        currentNineEl.innerHTML = `${data.label},<br />Day ${result.dayInNine}`;
+        currentPhaseEl.textContent = data.titleEn;
+        phaseIconEl.textContent = '❄️'; // Default icon
     } else if (result.status === 'before') {
         currentNineEl.innerHTML = `Starting Soon<br />${result.daysUntilStart} Days`;
         currentPhaseEl.textContent = 'Before Nine';
@@ -237,7 +215,11 @@ function updateFooterDate() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load nine data from JSON first
+    await loadNineData();
+
+    // Then initialize the UI
     updateUI();
     updateFooterDate();
 
