@@ -130,8 +130,30 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.35);
   min-height: 140px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.mongolian-script {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  font-size: 1.2rem;
+  color: var(--gold-dark);
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  padding-left: 0.5rem;
+  border-left: 2px solid rgba(212, 165, 116, 0.3);
 }
 
 .nine-card:hover {
